@@ -1,10 +1,10 @@
 call plug#begin('~/.vim/plugged')
-Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 call plug#end()
 
@@ -16,6 +16,7 @@ set clipboard=unnamed                       " Mac OS X clipboard sharing
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
+nnoremap <silent> <leader>n :FZF<cr>
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
