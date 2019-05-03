@@ -1,9 +1,11 @@
 call plug#begin('~/.vim/plugged')
-Plug 'chriskempson/base16-vim'
+" Plug 'chriskempson/base16-vim'
+Plug 'danielwe/base16-vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'elmcast/elm-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 call plug#end()
@@ -45,7 +47,7 @@ set splitbelow
 set splitright
 map <leader>v :vsplit<cr>
 
-set cursorline                              " highlight current line
+" set cursorline                              " highlight current line
 
 set incsearch                               " search as characters are entered
 set hlsearch                                " highlight search matches
@@ -72,3 +74,5 @@ let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 
+let g:polyglot_disabled = ['elm'] " disable polyglot for elm per
+                                  " elm-vim recommendation
