@@ -29,9 +29,10 @@ else
 fi
 local git_branch='$(git_prompt_info)%{$reset_color%}'
 
-local kube_ps='$(kube_ps1)%{$reset_color%}'
+# local kube_ps='$(kube_ps1)%{$reset_color%}'
 
-PROMPT="${user_host} ${current_dir} ${kube_ps} ${git_branch}
+# PROMPT="${user_host} ${current_dir} ${kube_ps} ${git_branch}
+PROMPT="${user_host} ${current_dir} ${git_branch}
 %B${user_symbol}%b "
 RPS1="%B${return_code}%b"
 

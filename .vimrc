@@ -1,6 +1,7 @@
 call plug#begin('~/.vim/plugged')
 " Plug 'chriskempson/base16-vim'
-Plug 'danielwe/base16-vim'
+" Plug 'danielwe/base16-vim'
+Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug '/usr/local/opt/fzf'
@@ -10,11 +11,13 @@ Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 call plug#end()
 
-" set background=dark
-" colorscheme solarized
-colorscheme base16-monokai
+syntax enable
+set background=dark
+colorscheme solarized
+" colorscheme base16-monokai
 
-set clipboard=unnamed                       " Mac OS X clipboard sharing
+" set clipboard=unnamed                     " Mac OS X clipboard sharing
+set clipboard=unnamedplus
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
@@ -47,7 +50,7 @@ set splitbelow
 set splitright
 map <leader>v :vsplit<cr>
 
-" set cursorline                              " highlight current line
+set cursorline                              " highlight current line
 
 set incsearch                               " search as characters are entered
 set hlsearch                                " highlight search matches
@@ -73,6 +76,3 @@ autocmd FileType go nmap <leader>r <Plug>(go-run)
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
-
-let g:polyglot_disabled = ['elm'] " disable polyglot for elm per
-                                  " elm-vim recommendation
