@@ -1,7 +1,8 @@
 call plug#begin('~/.vim/plugged')
-" Plug 'chriskempson/base16-vim'
+Plug 'dense-analysis/ale'
+Plug 'chriskempson/base16-vim'
 " Plug 'danielwe/base16-vim'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 " Plug '/usr/local/opt/fzf'
@@ -10,12 +11,19 @@ Plug 'junegunn/fzf.vim'
 Plug 'elmcast/elm-vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install', 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+Plug 'miyakogi/conoline.vim'
+Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
+Plug 'posva/vim-vue'
 call plug#end()
 
 syntax enable
 set background=dark
-colorscheme solarized
-" colorscheme base16-monokai
+" colorscheme solarized
+colorscheme base16-monokai
+filetype plugin on
 
 " set clipboard=unnamed                     " Mac OS X clipboard sharing
 set clipboard=unnamedplus
@@ -25,6 +33,8 @@ let mapleader=","                           " leader is ','
 nnoremap <silent> <leader>n :FZF<cr>
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 
 " Whitespace
 set tabstop=4                               " number of visual spaces per TAB
@@ -73,7 +83,34 @@ nnoremap <leader>a :cclose<CR>
 
 autocmd FileType go nmap <leader>b <Plug>(go-build)
 autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
 
 let g:go_fmt_command = "goimports"
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
+
+" let g:go_fmt_command = "gofmt"
+" let g:go_fmt_options = {
+"   \ 'gofmt': '-s',
+"   \ }
+
+let g:go_fmt_autosave = 1
+
+" let g:go_metalinter_autosave = 1
+
+let g:go_autodetect_gopath = 1
+
+let g:ale_fixers = {
+ \ 'javascript': ['eslint'],
+ \ 'vue': ['eslint'],
+ \ }
+
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_fix_on_save = 1
+
+" let g:prettier#autoformat = 0
+" autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
