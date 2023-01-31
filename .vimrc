@@ -1,10 +1,8 @@
 call plug#begin('~/.vim/plugged')
-" Plug 'chriskempson/base16-vim'
-" Plug 'danielwe/base16-vim'
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
+" Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
-" Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'elmcast/elm-vim'
@@ -13,12 +11,19 @@ Plug 'tpope/vim-sensible'
 call plug#end()
 
 syntax enable
-set background=dark
-colorscheme solarized
+" set background=dark
+" colorscheme solarized
 " colorscheme base16-monokai
 
-" set clipboard=unnamed                     " Mac OS X clipboard sharing
-set clipboard=unnamedplus
+if exists('$BASE16_THEME')
+    \ && (!exists('g:colors_name')
+    \ || g:colors_name != 'base16-$BASE16_THEME')
+  let base16colorspace=256
+  colorscheme base16-$BASE16_THEME
+endif
+
+set clipboard=unnamed                     " Mac OS X clipboard sharing
+" set clipboard=unnamedplus
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
