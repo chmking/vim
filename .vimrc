@@ -2,17 +2,17 @@
 let g:ale_disable_lsp = 1
 
 call plug#begin('~/.vim/plugged')
-Plug 'dense-analysis/ale'
 Plug 'chriskempson/base16-vim'
-" Plug 'danielwe/base16-vim'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'dense-analysis/ale'
 " Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
-" Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
+Plug 'mileszs/ack.vim'
 Plug 'miyakogi/conoline.vim'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'rust-lang/rust.vim'
@@ -20,13 +20,21 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 syntax enable
-set background=dark
+" set background=dark
 " colorscheme solarized
-colorscheme base16-monokai
+" colorscheme base16-monokai
+
+if exists('$BASE16_THEME')
+    \ && (!exists('g:colors_name')
+    \ || g:colors_name != 'base16-$BASE16_THEME')
+  let base16colorspace=256
+  colorscheme base16-$BASE16_THEME
+endif
+
 filetype plugin on
 
-" set clipboard=unnamed                     " Mac OS X clipboard sharing
-set clipboard=unnamedplus
+set clipboard=unnamed                     " Mac OS X clipboard sharing
+" set clipboard=unnamedplus
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
@@ -92,8 +100,14 @@ let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
-
 " let g:go_metalinter_autosave = 1
+
+let g:ackprg = 'ag --vimgrep --smart-case'
+cnoreabbrev ag Ack
+cnoreabbrev aG Ack
+cnoreabbrev Ag Ack
+cnoreabbrev AG Ack
+
 
 let g:ale_fixers = {
  \ 'javascript': ['eslint'],
