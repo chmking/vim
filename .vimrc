@@ -1,11 +1,11 @@
 " Let CoC handle LSP
+" This must be configured before the package is loaded by Plug
 let g:ale_disable_lsp = 1
 
 call plug#begin('~/.vim/plugged')
 Plug 'chriskempson/base16-vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
-" Plug 'altercation/vim-colors-solarized'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -20,9 +20,6 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 syntax enable
-" set background=dark
-" colorscheme solarized
-" colorscheme base16-monokai
 
 if exists('$BASE16_THEME')
     \ && (!exists('g:colors_name')
@@ -33,22 +30,23 @@ endif
 
 filetype plugin on
 
-set clipboard=unnamed                     " Mac OS X clipboard sharing
-" set clipboard=unnamedplus
+set clipboard=unnamed       " Mac OS X clipboard sharing
+" set clipboard=unnamedplus " Linux climpboard sharing 
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
 nnoremap <silent> <leader>n :FZF<cr>
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
-autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 
 " Whitespace
 set tabstop=4                               " number of visual spaces per TAB
 set softtabstop=4                           " number of spaces per TAB when editing
 set shiftwidth=4                            " set auto-indent to match tabstop
 set expandtab                               " convert tabs to spaces
+
+" File type overrides
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType json setlocal ts=2 sts=2 sw=2 expandtab
 
 " Buffers
 set hidden
@@ -89,26 +87,30 @@ map <C-n> :cnext<CR>
 map <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
 
-autocmd FileType go nmap <leader>b <Plug>(go-build)
-autocmd FileType go nmap <leader>r <Plug>(go-run)
-autocmd FileType go nmap <leader>t <Plug>(go-test)
-
-let g:instant_markdown_slow = 1
-let g:instant_markdown_autostart = 0
-
+" Go config
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_autodetect_gopath = 1
 let g:go_list_type = "quickfix"
 " let g:go_metalinter_autosave = 1
 
+" Go command mapping
+autocmd FileType go nmap <leader>b <Plug>(go-build)
+autocmd FileType go nmap <leader>r <Plug>(go-run)
+autocmd FileType go nmap <leader>t <Plug>(go-test)
+
+" Instant markdown
+let g:instant_markdown_slow = 1
+let g:instant_markdown_autostart = 0
+
+" Ag (Ack) config
 let g:ackprg = 'ag --vimgrep --smart-case'
 cnoreabbrev ag Ack
 cnoreabbrev aG Ack
 cnoreabbrev Ag Ack
 cnoreabbrev AG Ack
 
-
+" Ale config
 let g:ale_fixers = {
  \ 'javascript': ['eslint'],
  \ }
