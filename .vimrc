@@ -13,7 +13,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-sensible'
 Plug 'mileszs/ack.vim'
-Plug 'miyakogi/conoline.vim'
+" Plug 'miyakogi/conoline.vim'
 Plug 'suan/vim-instant-markdown', {'for': 'markdown'}
 Plug 'rust-lang/rust.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -30,8 +30,8 @@ endif
 
 filetype plugin on
 
-set clipboard=unnamed       " Mac OS X clipboard sharing
-" set clipboard=unnamedplus " Linux climpboard sharing 
+" set clipboard=unnamed       " Mac OS X clipboard sharing
+set clipboard=unnamedplus     " Linux climpboard sharing
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
@@ -112,8 +112,15 @@ cnoreabbrev AG Ack
 
 " Ale config
 let g:ale_fixers = {
- \ 'javascript': ['eslint'],
+ \ 'css': ['prettier'],
+ \ 'html': ['prettier'],
+ \ 'javascript': ['prettier'],
+ \ 'json': ['prettier'],
+ \ 'liquid': ['prettier'],
+ \ 'scss': ['prettier'],
  \ }
+
+let g:ale_fix_on_save = 1
 
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
@@ -173,3 +180,6 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+au BufRead,BufNewFile *.njk setfiletype html
+au BufRead,BufNewFile *.webc setfiletype html
