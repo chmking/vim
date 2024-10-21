@@ -35,8 +35,11 @@ endif
 
 filetype plugin on
 
-" set clipboard=unnamed       " Mac OS X clipboard sharing
-set clipboard=unnamedplus     " Linux climpboard sharing
+if has('mac')
+  set clipboard=unnamed     " Mac OS X clipboard sharing
+else
+  set clipboard=unnamedplus " Linux climpboard sharing
+endif
 
 imap jk <ESC>
 let mapleader=","                           " leader is ','
