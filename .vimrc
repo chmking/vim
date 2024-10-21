@@ -20,6 +20,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 syntax enable
+filetype plugin indent on
+
+" May need for Vim (not Neovim) since coc.nvim calculates byte offset by count
+" utf-8 byte sequence
+set encoding=utf-8
 
 if exists('$BASE16_THEME')
     \ && (!exists('g:colors_name')
@@ -127,8 +132,11 @@ let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
 let g:ale_set_highlights = 0
 
+" Rust autofmt on save
 let g:rustfmt_autosave = 1
 
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved
 set signcolumn=yes
 
 " Use tab for trigger completion with characters ahead and navigate.
