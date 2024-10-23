@@ -66,6 +66,9 @@ set switchbuf=useopen
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+au BufRead,BufNewFile *.njk setfiletype html
+au BufRead,BufNewFile *.webc setfiletype html
+
 " Splits
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -128,8 +131,6 @@ let g:ale_fixers = {
  \ 'scss': ['prettier'],
  \ }
 
-let g:ale_fix_on_save = 1
-
 let g:ale_sign_error = '❌'
 let g:ale_sign_warning = '⚠️'
 let g:ale_fix_on_save = 1
@@ -153,15 +154,15 @@ inoremap <silent><expr> <TAB>
       \ coc#refresh()
 inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
 
-" Make <CR> to accept selected completion item or notify coc.nvim to format
-" <C-g>u breaks current undo, please make your own choice.
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-
 function! CheckBackspace() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice.
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
 
 " Use <c-space> to trigger completion.
 if has('nvim')
@@ -192,5 +193,3 @@ function! ShowDocumentation()
   endif
 endfunction
 
-au BufRead,BufNewFile *.njk setfiletype html
-au BufRead,BufNewFile *.webc setfiletype html
